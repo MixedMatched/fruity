@@ -8,3 +8,10 @@ edition = "2021"
 [dependencies]
 sycamore = "0.8"
 rcas = { git = "https://github.com/nw-rs/rcas" }
+
+[profile.release]
+opt-level = "z"
+codegen-units = 1
+debug = 0
+lto = "fat"
+panic = "abort"

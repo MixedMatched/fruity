@@ -36,6 +36,14 @@ fn main() {
         view! { cx,
             div {
                 h1 { "Fruity" }
+                p {
+                    span(id="problem") {
+                        "ax^2 + bx + c = 0"
+                    }
+                    span(id="answer") {
+                        "x = "
+                    }
+                }
                 p { "Enter an expression:" }
                 input(bind:value=expr_state)
                 (if expr_state.get().len() != 0 {
@@ -47,6 +55,17 @@ fn main() {
                 } else {
                     view! {cx, p { "No expression entered" }}
                 })
+            }
+            script {
+                "var MQ = MathQuill.getInterface(2);
+                MQ.StaticMath($('#problem')[0]);
+                var answer = MQ.MathField($('#answer')[0], {
+                  handlers: {
+                    edit: function() {
+                      checkAnswer(answer.latex());
+                    }
+                  }
+                });"
             }
         }
     });

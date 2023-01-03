@@ -1,8 +1,11 @@
-use rcas::{
+use citrus_cas::{
     expression::expression_tree::Expression,
     modifier::default::{approximator, evaluator, simplifier},
 };
 use sycamore::prelude::*;
+
+#[global_allocator]
+static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[component(inline_props)]
 fn EvaluatedView<G: Html>(cx: Scope, expr: Expression) -> View<G> {
